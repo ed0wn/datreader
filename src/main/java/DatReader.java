@@ -11,6 +11,10 @@ import java.util.Objects;
 
 public class DatReader {
 
+  VehicleFactory vehicleFactory =new VehicleFactory();
+  List<Vehicle> vehicleList = new ArrayList<>();
+  List<String> pathNames = new ArrayList<>();
+
   /*Feladat:
 Objektum orinentáltan írj egy egyszerű programot két függvénnyel. Mindenképpen használd ki az objektum orientáltságot!
 
@@ -41,11 +45,8 @@ Objektum orinentáltan írj egy egyszerű programot két függvénnyel. Mindenk�
 
 
   public List<Vehicle> convertDatToObject() {
-    VehicleFactory vehicleFactory =new VehicleFactory();
-    List<Vehicle> vehicleList = new ArrayList<>();
-    List<String> pathNames = new ArrayList<>();
     pathNames = loadFile("src/main/resources/data",pathNames);
-      for(String pathName: Objects.requireNonNull(pathNames)) {
+      for(String pathName: pathNames) {
         try {
           byte[] data = Files.readAllBytes(Paths.get(pathName));
           String json = new String(data, StandardCharsets.UTF_8);
@@ -54,15 +55,9 @@ Objektum orinentáltan írj egy egyszerű programot két függvénnyel. Mindenk�
           fileNameWithOutExt = FilenameUtils.removeExtension(fileNameWithOutExt);
           vehicleList.add(vehicleFactory.createVehicle(json, fileNameWithOutExt));
         }catch (IOException e){
-          System.out.println("IOOOOOO");
+          System.out.println("invalid path");
         }
       }
     return vehicleList;
-  }
-
-  public void print(List<Vehicle> vehicleList) {
-    for (Vehicle vehicle : vehicleList) {
-      vehicle.toString();
-    }
   }
 }

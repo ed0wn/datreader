@@ -17,7 +17,7 @@ public class GUILauncher extends Application {
     launch(args);
   }
   @Override
-  public void start(Stage primaryStage) throws Exception {
+  public void start(Stage primaryStage) {
     Button button = new Button();
     DatReader datReader= new DatReader();
     button.setText("List Items");

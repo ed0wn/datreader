@@ -7,10 +7,10 @@ public class VehicleFactory implements BaseVehicleFactory {
     Vehicle vehicle;
     if (type.contains("auto")) {
       vehicle = new Gson().fromJson(type, Car.class);
-      vehicle.setId(id);
+      ((Car) vehicle).setId(id);
     }else if (type.contains("bicikli")) {
       vehicle = new Gson().fromJson(type, Bicycle.class);
-      vehicle.setId(id);
+      ((Bicycle) vehicle).setId(id);
     }else {
         throw new IllegalArgumentException("No such Vehicle.");
     }
